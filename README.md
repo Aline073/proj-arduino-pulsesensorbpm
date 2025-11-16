@@ -22,9 +22,6 @@ Bibliotecas instaladas na Arduino IDE
 - PulseSensorPlayground — leitura e processamento do sensor de pulso.
 - WiFi (incluído no core do ESP32) — gerenciamento da conexão Wi‑Fi.
 
-O código consta no anexo. Deve inserir o Nome da rede Wifi, a senha e o IP da máquina que será executada.
-Para obter o IP da máquina: abra o CMD, rode ipconfig e use o campo IPv4.
-
 Funcionamento e acionamento dos materiais:
 
 O protótipo desenvolvido integra sensores, atuadores e conectividade para realizar o monitoramento fisiológico remoto de forma eficiente. O processo tem início com a leitura dos batimentos cardíacos, captados pelo dedo do usuário. O sensor de pulso, baseado em tecnologia óptica amplificada, detecta as variações de fluxo sanguíneo e transmite os dados ao microcontrolador ESP32 por meio de um único pino de sinal conectado à entrada analógica D32.
@@ -33,6 +30,11 @@ O microcontrolador opera em modo station, conectando-se a uma rede Wi-Fi local. 
 Por fim, o código responsável pelo funcionamento do sistema é desenvolvido em linguagem C++ e transferido para o ESP32 por meio de cabo USB conectado ao computador, utilizando a IDE Arduino como ambiente de programação. A conexão física via USB entre o microcontrolador e o computador também permite a depuração e o monitoramento em tempo real durante o desenvolvimento.
 •	 A conexão da via cabo USB entre o micontrolador e notebook transferirá o código em C+ do software para a execução do projeto.
 
-Fazer o download do Broker Mosquitto no site https://mosquitto.org/download/ para o sistema operacional da máquima e instalar.
-Após instalar, realizar a alteração do arquivo mosquitto.conf e no firewall, conforme link do youtube https://www.youtube.com/watch?v=2l14dez0VjI&t=7s . Incluir o executável do mosquitto no path.
- 
+O código está anexado, antes de carregar, edite as variáveis para inserir o nome da rede Wi‑Fi (SSID), a senha e o endereço IP do computador onde o broker será executado. Para obter o IP da máquina no Windows, abra o Prompt de Comando, execute ipconfig e utilize o valor informado em IPv4.
+
+Faça o download do broker Mosquitto em https://mosquitto.org/download/ compatível com o sistema operacional da máquina e instale-o. Após a instalação, edite o arquivo de configuração mosquitto.conf conforme necessário e ajuste o firewall para permitir a porta MQTT (padrão 1883); se precisar de um passo a passo, consulte o tutorial indicado no link https://www.youtube.com/watch?v=2l14dez0VjI&t=7s. Adicione o executável do Mosquitto ao PATH do sistema para permitir sua execução a partir do prompt de comando.
+
+Em seguida, instale o MQTT Explorer (https://mqtt-explorer.com/) e crie uma nova conexão definindo Name conforme preferir, Host = test.mosquitto.org e Port = 1883; conecte para verificar o funcionamento do cliente.
+
+Com todos os programas instalados, carregue e execute o código no Arduino IDE. Verifique no Monitor Serial do Arduino a conexão Wi‑Fi e as mensagens de status, e confirme no MQTT Explorer que as mensagens publicadas pelo ESP32 estão sendo recebidas corretamente.
+
